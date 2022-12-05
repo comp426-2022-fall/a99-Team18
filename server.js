@@ -9,6 +9,6 @@ import {fileURLToPath} from 'url';
 const db = new database('task.db');
 db.pragma('journal_mode = WAL');
 
-
-
 const app = express();
+app.set('view engine', 'ejs');
+app.set('frontEndPages', path.join(__dirname, 'frontEndPages'));
