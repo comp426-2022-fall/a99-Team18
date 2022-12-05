@@ -6,20 +6,25 @@ import {fileURLToPath} from 'url';
 
 
 // Create database
-const db = new database('task.db');
-db.pragma('journal_mode = WAL');
+//const db = new database('task.db');
+//db.pragma('journal_mode = WAL');
+
+
+// Create all the needed constants
+const args = minimist(process.argv.slice(2));
+const port = args.port || 2000
+
 
 // Connect app to front end pages in frontEndPages directory
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const app = express();
 app.use(express.static("styling"));
 app.set('view engine', 'ejs');
 app.set('frontEndPages', path.join(__dirname, 'frontEndPages'));
 
-// Create all the needed constants
-const app = express();
-const args = minimist(process.argv.slice(2));
-const port = args.port || 2000
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // Create all endpoints for app, depending on what app becomes
 // ex. 
@@ -35,6 +40,14 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 //    update database
 //    res.redirect('/homepage');
 // });
+
+app.get('/', function(req, res) {
+    res.redirect('/homePage');
+  })
+  
+// app.get('/app', function (req, res) {
+//     res.redirect('/homePage');
+// })
 
 
 app.listen(port)
