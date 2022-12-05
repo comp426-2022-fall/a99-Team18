@@ -5,6 +5,7 @@ import path from 'path';
 import {fileURLToPath} from 'url';
 //import { roshambo } from './lib/roshambo.js';
 import { magic8ball } from './lib/magic8ball.js';
+import { mora } from './lib/mora.js';
 
 
 // // Create database
@@ -74,6 +75,7 @@ app.post('/roshambo', function(req, res) {
 });
 
 app.post('/morra', function(req, res) {
+    //var _mRes = mora();
     res.render('morra')
 });
 
