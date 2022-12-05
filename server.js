@@ -3,7 +3,7 @@ import minimist from 'minimist';
 import database from "better-sqlite3";
 import path from 'path';
 import {fileURLToPath} from 'url';
-//import { roshambo } from './lib/roshambo.js';
+import { roshambo } from './lib/roshambo.js';
 
 
 // // Create database
@@ -81,6 +81,20 @@ app.post('/tictactoe', function(req, res) {
 
 app.post('/magic8ball', function(req, res) {
     res.render('magic8ball')
+});
+
+app.post('/playRoshambo', function(req, res) {
+    //let output = "Rock";//roshambo();
+    //const element = document.getElementById("white");
+    // if (output == "Rock") {
+    //     element.innerHTML = "styling/rock.jpg";
+    // } else if (output == "Paper") {
+    //     element.innerHTML = "paper.jpg";
+    // } else {
+    //     element.innerHTML = "styling/scissors.jpg";   
+    // }
+    //element.innerHTML = "styling/scissors.jpg";
+    res.render('roshambo');
 });
 
 
