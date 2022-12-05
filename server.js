@@ -59,6 +59,10 @@ app.get('/homePage', function(req, res) {
     res.render('homePage');
 });
 
+app.post('/homePage', function(req, res) {
+    res.render('homePage')
+});
+
 app.post('/gameMenu', function(req, res) {
     res.render('gameMenu')
 });

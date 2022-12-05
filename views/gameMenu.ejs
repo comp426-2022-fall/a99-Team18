@@ -5,14 +5,14 @@
         <link rel="stylesheet" href="styling.css">
     </head>
     <body>
-        <div class="game-menu-layout" style="top:2.5%;left:2.5%">
+        <div class="game-menu-layout" style="top:2.5%;left:2.5%;z-index:-1;">
             <h1>Rock Paper Scissors</h1>
             <img src="../rock-paper-scissors.jpg" height = "200px" width = "275px"/>
             <form method="post" action="/roshambo">
                 <input type="submit" value="Play">
             </form>
         </div>
-        <div class="game-menu-layout" style="top:2.5%;right:2.5%">
+        <div class="game-menu-layout" style="top:2.5%;right:2.5%;z-index:-1;">
             <h1>Morra</h1>
             <img src="../morra.jpg" height = "200px" width = "275px"/>
             <form method="post" action="/morra">
@@ -31,6 +31,11 @@
             <img src="../magic-8-ball.jpg" height = "200px" width = "200px"/>
             <form method="post" action="/magic8ball">
                 <input type="submit" value="Play">
+            </form>
+        </div>
+        <div>
+            <form method="post" action="/homePage" style="text-align:center;margin:auto;width:50%;z-index:1;">
+                <input type="submit" value="Return to Homepage">
             </form>
         </div>
     </body>
