@@ -49,6 +49,11 @@ app.get('/', function(req, res) {
 app.get('/homePage', function(req, res) {
     res.render('homePage');
 });
+
+app.post('/roshambo', function(req, res) {
+    res.render('roshambo');
+});
+
   
 // app.get('/app', function (req, res) {
 //     res.redirect('/homePage');
