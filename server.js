@@ -6,21 +6,27 @@ import {fileURLToPath} from 'url';
 //import { roshambo } from './lib/roshambo.js';
 import { magic8ball } from './lib/magic8ball.js';
 import { mora } from './lib/mora.js';
+import morgan from 'morgan';
 
 
 // // Create database
-// const db = new database('points.db'); //TODO: there is an error here if the database already exists
-// db.pragma('journal_mode = WAL');
+const db = new database('points.db');
+db.pragma('journal_mode = WAL');
 
 // //Tables to track users/passwords, wins across games, and access log
-// const sql_users = `CREATE TABLE users (id INTEGER PRIMARY KEY, username VARCHAR, password VARCHAR);`
-// db.exec(sql_users);
-
-// const sql_wins = `CREATE TABLE wins (id INTEGER PRIMARY KEY, user VARCHAR, game1 INTEGER, game2 INTEGER, game3 INTEGER, game4 INTEGER);`
-// db.exec(sql_wins);
-
-// const sql_logs = `CREATE TABLE accesslog (id INTEGER PRIMARY KEY, remote_addr VARCHAR, remote_user VARCHAR, date VARCHAR, method VARCHAR, url VARCHAR, http_version VARCHAR, status INTEGER, content_length VARCHAR, referer_url VARCHAR, user_agent VARCHAR);`
-// db.exec(sql_logs);
+const stmt_bases = db.prepare(`SELECT name FROM sqlite_master WHERE type='table';`)
+let row = stmt_bases.get();
+// If access log table doesn't exist, create it.
+if (row === undefined) { 
+	const sql_users = `CREATE TABLE users (id INTEGER PRIMARY KEY, username VARCHAR, password VARCHAR);`
+	db.exec(sql_users);
+	
+	const sql_wins = `CREATE TABLE wins (id INTEGER PRIMARY KEY, user VARCHAR, game1 INTEGER, game2 INTEGER, game3 INTEGER, game4 INTEGER);`
+	db.exec(sql_wins);
+	
+	const sql_logs = `CREATE TABLE accesslog (id INTEGER PRIMARY KEY, remote_addr VARCHAR, remote_user VARCHAR, date VARCHAR, method VARCHAR, url VARCHAR, http_version VARCHAR, status INTEGER, content_length VARCHAR, referer_url VARCHAR, user_agent VARCHAR);` 
+	db.exec(sql_logs);
+}
 
 // Create all the needed constants
 const args = minimist(process.argv.slice(2));
@@ -37,6 +43,20 @@ app.set('frontEndPages', path.join(__dirname, 'frontEndPages'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
+
+//Create access log and put in database using morgan TODO: need to fix
+// const accesslog = fs.createWriteStream( './access.log', { flags: 'a'});
+
+// app.use(morgan('combined', { stream: accesslog }));
+
+// app.use((req, res, next) => {
+// 	let logdata = {
+
+// 	}
+// 	const stmt_log = db.prepare(`INSERT INTO accesslog ()`);
+// 	const info = stmt_log.run();
+// 	next();
+// });
 
 
 // Create all endpoints for app, depending on what app becomes
@@ -117,8 +137,40 @@ app.post('/magic8ball', function(req, res) {
 // 	}
 // });
 
-app.get('/gameMenu', function(req, res) {
-	res.render('gameMenu');
+app.post('/roshamboWin', function(req, res) {
+	let curr_user = req.app.get(username);
+	const stmt1 = db.prepare(`SELECT game1 FROM wins WHERE user = ?`);
+	var newWins = stmt2.run(curr_user).get() + 1;
+
+	const stmt2 = db.prepare('INSERT INTO wins (game1) (?)');
+	stmt2.run(newWins);
+});
+
+app.post('/morraWin', function(req, res) {
+	let curr_user = req.app.get(username);
+	const stmt1 = db.prepare(`SELECT game2 FROM wins WHERE user = ?`);
+	var newWins = stmt2.run(curr_user).get() + 1;
+
+	const stmt2 = db.prepare('INSERT INTO wins (game2) (?)');
+	stmt2.run(newWins);
+});
+
+app.post('/magic8ballWin', function(req, res) {
+	let curr_user = req.app.get(username);
+	const stmt1 = db.prepare(`SELECT game4 FROM wins WHERE user = ?`);
+	var newWins = stmt2.run(curr_user).get() + 1;
+
+	const stmt2 = db.prepare('INSERT INTO wins (game4) (?)');
+	stmt2.run(newWins);
+});
+
+app.post('/tictactoeWin', function(req, res) {
+	let curr_user = req.app.get(username);
+	const stmt1 = db.prepare(`SELECT game3 FROM wins WHERE user = ?`);
+	var newWins = stmt2.run(curr_user).get() + 1;
+
+	const stmt2 = db.prepare('INSERT INTO wins (game3) (?)');
+	stmt2.run(newWins);
 });
 
 app.get('/invalidLogin', function(req, res) {
