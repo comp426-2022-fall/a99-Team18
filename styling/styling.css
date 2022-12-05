@@ -1,0 +1,25 @@
+body {background-color: #9c9b98}
+
+.main-page-layout {
+    width: 95%;
+    height: 95%;
+    background-color: #DCDCDC;
+    position: absolute;
+    top: 2.5%;   
+    left: 2.5%;
+    text-align: center; 
+}
+    .main-page-layout h1{
+        font-size: 55px;
+        color:black;
+        top: -5%;
+    }
+
+    .main-page-layout h2 {
+        font-size: 35px;
+        color: rgb(6, 37, 242);
+    }
+    .main-page-layout h3 {
+        font-size: 20px;
+        color: black;
+    }

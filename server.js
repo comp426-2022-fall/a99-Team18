@@ -3,7 +3,7 @@ import minimist from 'minimist';
 import database from "better-sqlite3";
 import path from 'path';
 import {fileURLToPath} from 'url';
-import { roshambo } from './lib/roshambo.js';
+//import { roshambo } from './lib/roshambo.js';
 
 
 // Create database
