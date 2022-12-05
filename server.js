@@ -3,7 +3,8 @@ import minimist from 'minimist';
 import database from "better-sqlite3";
 import path from 'path';
 import {fileURLToPath} from 'url';
-import { roshambo } from './lib/roshambo.js';
+//import { roshambo } from './lib/roshambo.js';
+import { magic8ball } from './lib/magic8ball.js';
 
 
 // // Create database
@@ -34,6 +35,7 @@ app.set('frontEndPages', path.join(__dirname, 'frontEndPages'));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.set('view engine', 'ejs');
 
 
 // Create all endpoints for app, depending on what app becomes
@@ -80,21 +82,8 @@ app.post('/tictactoe', function(req, res) {
 });
 
 app.post('/magic8ball', function(req, res) {
-    res.render('magic8ball')
-});
-
-app.post('/playRoshambo', function(req, res) {
-    //let output = "Rock";//roshambo();
-    //const element = document.getElementById("white");
-    // if (output == "Rock") {
-    //     element.innerHTML = "styling/rock.jpg";
-    // } else if (output == "Paper") {
-    //     element.innerHTML = "paper.jpg";
-    // } else {
-    //     element.innerHTML = "styling/scissors.jpg";   
-    // }
-    //element.innerHTML = "styling/scissors.jpg";
-    res.render('roshambo');
+    var _res = magic8ball();
+    res.render('magic8ball', {res: _res});
 });
 
 
@@ -139,4 +128,3 @@ app.get('/newAccount', function(req, res) {
 // })
 
 app.listen(port)
-
