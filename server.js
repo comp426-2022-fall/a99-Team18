@@ -7,7 +7,7 @@ import {fileURLToPath} from 'url';
 
 
 // Create database
-const db = new database('points.db');
+const db = new database('points.db'); //TODO: there is an error here if the database already exists
 db.pragma('journal_mode = WAL');
 
 //Tables to track users/passwords, wins across games, and access log
