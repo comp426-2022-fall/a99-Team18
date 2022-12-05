@@ -4,13 +4,15 @@ import database from "better-sqlite3";
 import path from 'path';
 import {fileURLToPath} from 'url';
 //import { roshambo } from './lib/roshambo.js';
+import { magic8ball } from './lib/magic8ball.js';
+import { mora } from './lib/mora.js';
 
 
-// Create database
+// // Create database
 const db = new database('points.db');
 db.pragma('journal_mode = WAL');
 
-//Tables to track users/passwords, wins across games, and access log (need to check if table are already there)
+// //Tables to track users/passwords, wins across games, and access log
 // const sql_users = `CREATE TABLE users (id INTEGER PRIMARY KEY, username VARCHAR, password VARCHAR);`
 // db.exec(sql_users);
 
@@ -34,6 +36,7 @@ app.set('frontEndPages', path.join(__dirname, 'frontEndPages'));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.set('view engine', 'ejs');
 
 
 // Create all endpoints for app, depending on what app becomes
@@ -59,30 +62,90 @@ app.get('/homePage', function(req, res) {
     res.render('homePage');
 });
 
+app.post('/homePage', function(req, res) {
+    res.render('homePage')
+});
+
+app.post('/gameMenu', function(req, res) {
+    res.render('gameMenu')
+});
+
 app.post('/roshambo', function(req, res) {
     res.render('roshambo');
 });
 
-app.post('/homePage', function(req, res) {
-	const username = req.body.username;
-	const password = req.body.password;
+app.post('/morra', function(req, res) {
+    //var _mRes = mora();
+    res.render('morra')
+});
 
-	const new_username = req.body.new_username;
-	const new_password = req.body.new_password;
+app.post('/tictactoe', function(req, res) {
+    res.render('tictactoe')
+});
+
+app.post('/magic8ball', function(req, res) {
+    var _res = magic8ball();
+    res.render('magic8ball', {res: _res});
+});
+
+
+
+// app.post('/homePage', function(req, res) {
+// 	const username = req.body.username;
+// 	const password = req.body.password;
+
+// 	const new_username = req.body.new_username;
+// 	const new_password = req.body.new_password;
 	
-	if (new_username == null && new_password == null) {
-		const stmt1 = db.prepare(`SELECT * FROM users WHERE username= ? and password= ?;`);
-		const exists = stmt1.run(username, password).get();
-		if (exists != undefined) {
-			res.redirect('/gameMenu');
-		} else {
-			res.redirect('/invalidLogin');
-		}
-	} else {
-		const stmt2 = db.prepare('INSERT INTO users (username, password) (?, ?)');
-		stmt2.run(new_username, new_password);
-		res.redirect('/newAccount');
-	}
+// 	if (new_username == null && new_password == null) {
+// 		const stmt1 = db.prepare(`SELECT * FROM users WHERE username= ? and password= ?;`);
+// 		const exists = stmt1.run(username, password).get();
+// 		if (exists != undefined) {
+// 			res.redirect('/gameMenu');
+// 		} else {
+// 			res.redirect('/invalidLogin');
+// 		}
+// 	} else {
+// 		const stmt2 = db.prepare('INSERT INTO users (username, password) (?, ?)');
+// 		stmt2.run(new_username, new_password);
+// 		res.redirect('/newAccount');
+// 	}
+// });
+
+app.post('/roshamboWin', function(req, res) {
+	let curr_user = req.app.get(username);
+	const stmt1 = db.prepare(`SELECT game1 FROM wins WHERE user = ?`);
+	var newWins = stmt2.run(curr_user).get() + 1;
+
+	const stmt2 = db.prepare('INSERT INTO wins (game1) (?)');
+	stmt2.run(newWins);
+});
+
+app.post('/morraWin', function(req, res) {
+	let curr_user = req.app.get(username);
+	const stmt1 = db.prepare(`SELECT game2 FROM wins WHERE user = ?`);
+	var newWins = stmt2.run(curr_user).get() + 1;
+
+	const stmt2 = db.prepare('INSERT INTO wins (game2) (?)');
+	stmt2.run(newWins);
+});
+
+app.post('/magic8ballWin', function(req, res) {
+	let curr_user = req.app.get(username);
+	const stmt1 = db.prepare(`SELECT game3 FROM wins WHERE user = ?`);
+	var newWins = stmt2.run(curr_user).get() + 1;
+
+	const stmt2 = db.prepare('INSERT INTO wins (game3) (?)');
+	stmt2.run(newWins);
+});
+
+app.post('/tictactoeWin', function(req, res) {
+	let curr_user = req.app.get(username);
+	const stmt1 = db.prepare(`SELECT game4 FROM wins WHERE user = ?`);
+	var newWins = stmt2.run(curr_user).get() + 1;
+
+	const stmt2 = db.prepare('INSERT INTO wins (game4) (?)');
+	stmt2.run(newWins);
 });
 
 app.get('/gameMenu', function(req, res) {
@@ -103,4 +166,3 @@ app.get('/newAccount', function(req, res) {
 // })
 
 app.listen(port)
-

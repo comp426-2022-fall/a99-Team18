@@ -1,0 +1,9 @@
+Dec 4, 2022
+    - Ankit attempts to update the license but doesn't have the permissions
+    - Keaw updates permissions
+
+Dec 5, 2022
+    - At some point Ankit and "DaverinoXD" decide to move forward with a minigame app that holds a database of points and users
+    - They add rock paper scissors
+    - Keaw adds odds and evens, Mora, and tic tac toe to the games.
+    - Keaw adds a magic 8 ball generator.
