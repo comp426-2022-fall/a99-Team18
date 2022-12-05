@@ -10,15 +10,15 @@ import {fileURLToPath} from 'url';
 const db = new database('points.db');
 db.pragma('journal_mode = WAL');
 
-//Tables to track users/passwords, wins across games, and access log
-const sql_users = `CREATE TABLE users (id INTEGER PRIMARY KEY, username VARCHAR, password VARCHAR);`
-db.exec(sql_users);
+//Tables to track users/passwords, wins across games, and access log (need to check if table are already there)
+// const sql_users = `CREATE TABLE users (id INTEGER PRIMARY KEY, username VARCHAR, password VARCHAR);`
+// db.exec(sql_users);
 
-const sql_wins = `CREATE TABLE wins (id INTEGER PRIMARY KEY, user VARCHAR, game1 INTEGER, game2 INTEGER, game3 INTEGER, game4 INTEGER);`
-db.exec(sql_wins);
+// const sql_wins = `CREATE TABLE wins (id INTEGER PRIMARY KEY, user VARCHAR, game1 INTEGER, game2 INTEGER, game3 INTEGER, game4 INTEGER);`
+// db.exec(sql_wins);
 
-const sql_logs = `CREATE TABLE accesslog (id INTEGER PRIMARY KEY, remote_addr VARCHAR, remote_user VARCHAR, date VARCHAR, method VARCHAR, url VARCHAR, http_version VARCHAR, status INTEGER, content_length VARCHAR, referer_url VARCHAR, user_agent VARCHAR);`
-db.exec(sql_logs);
+// const sql_logs = `CREATE TABLE accesslog (id INTEGER PRIMARY KEY, remote_addr VARCHAR, remote_user VARCHAR, date VARCHAR, method VARCHAR, url VARCHAR, http_version VARCHAR, status INTEGER, content_length VARCHAR, referer_url VARCHAR, user_agent VARCHAR);`
+// db.exec(sql_logs);
 
 // Create all the needed constants
 const args = minimist(process.argv.slice(2));
