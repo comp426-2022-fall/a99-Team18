@@ -47,12 +47,31 @@ app.get('/', function(req, res) {
 });
 
 app.get('/homePage', function(req, res) {
-    res.render('homePage');
+    res.render('gameMenu');
 });
+
 
 app.post('/roshambo', function(req, res) {
     res.render('roshambo');
 });
+
+// app.post('/homePage', function(req, res) {
+// 	const username = req.username;
+// 	const password = req.password;
+
+// 	const new_username = req.new_username;
+// 	const new_password = req.new_username;
+	
+// 	if (new_username == null && new_password == null) {
+// 		if ( ) {
+// 			res.redirect('/gamepage');
+// 		} else {
+// 			res.redirect('/invalid');
+// 		}
+// 	} else {
+// 		res.redirect('/accountcreate');
+// 	}
+// }
 
   
 // app.get('/app', function (req, res) {
