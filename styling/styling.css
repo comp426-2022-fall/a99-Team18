@@ -43,3 +43,17 @@ body {background-color: #9c9b98}
         font-size: 15px;
         color: black;
     }
+
+input[type=submit] {
+    background-color: #DCDCDC;
+    color: black;
+    border-color: black;
+    font-size: 15px;
+}
+
+input[type=submit]:hover {
+    background-color: black;
+    color: #DCDCDC;
+    border-color: black;
+    font-size: 15px;
+}

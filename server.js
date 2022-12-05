@@ -59,6 +59,10 @@ app.get('/homePage', function(req, res) {
     res.render('homePage');
 });
 
+app.post('/roshambo', function(req, res) {
+    res.render('roshambo');
+});
+
 app.post('/homePage', function(req, res) {
 	const username = req.body.username;
 	const password = req.body.password;
