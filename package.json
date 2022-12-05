@@ -1,0 +1,26 @@
+{
+  "name": "a99-team18",
+  "version": "1.0.0",
+  "description": "Final Project Comp 426 Team 18",
+  "main": "server.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "*****unknown*****"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/comp426-2022-fall/a99-Team18.git"
+  },
+  "author": "David Nassif-Ankit Karki-Chalisa Keaw Phoomsakha",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/comp426-2022-fall/a99-Team18/issues"
+  },
+  "homepage": "https://github.com/comp426-2022-fall/a99-Team18#readme",
+  "dependencies": {
+    "minimist": "^1.2.7",
+    "express": "4.18.2"
+  }
+}
