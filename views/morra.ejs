@@ -11,13 +11,20 @@
             <h4 style="font-weight:normal">Guess what the sum of your fingers are!</h4>
             <h4 style="font-weight:normal">Select how many fingers you are holding up.</h4>
             <h4 style="font-weight:normal">If you guess right, you win that many points!</h4>
-            <div class="btn-group">
-                <button>1</button>
-                <button>2</button>
-                <button>3</button>
-                <button>4</button>
-                <button>5</button>
-              </div>
+            <div>
+                <form method="get" action="/morra">
+                    Guess: <input type="text" name="guess" value=""><br>
+                    <label for="input">Fingers:</label>
+                    <select id="input" name="userfingers">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    </select>
+                    <input type="submit" value="Play!">
+                </form>
+            </div>
         </div>
         <div>
             <form method="post" action="/gameMenu" style="text-align:center;margin:auto;width:50%;z-index:1;">

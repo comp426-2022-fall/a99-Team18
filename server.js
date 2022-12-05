@@ -79,6 +79,11 @@ app.post('/morra', function(req, res) {
     res.render('morra')
 });
 
+// app.get('/morra/:guess/:fingers', function(req, res) {
+//     var _mRes = mora(req.params.guess, req.params.fingers);
+//     res.render('morra', {})
+// });
+
 app.post('/tictactoe', function(req, res) {
     res.render('tictactoe')
 });
