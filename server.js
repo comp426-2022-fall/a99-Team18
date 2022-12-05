@@ -7,9 +7,18 @@ import {fileURLToPath} from 'url';
 
 
 // Create database
-const db = new database('task.db');
+const db = new database('points.db');
 db.pragma('journal_mode = WAL');
 
+//Tables to track users/passwords, wins across games, and access log
+const sql_users = `CREATE TABLE users (id INTEGER PRIMARY KEY, username VARCHAR, password VARCHAR);`
+db.exec(sql_users);
+
+const sql_wins = `CREATE TABLE wins (id INTEGER PRIMARY KEY, user VARCHAR, game1 INTEGER, game2 INTEGER, game3 INTEGER, game4 INTEGER);`
+db.exec(sql_wins);
+
+const sql_logs = `CREATE TABLE accesslog (id INTEGER PRIMARY KEY, remote_addr VARCHAR, remote_user VARCHAR, date VARCHAR, method VARCHAR, url VARCHAR, http_version VARCHAR, status INTEGER, content_length VARCHAR, referer_url VARCHAR, user_agent VARCHAR);`
+db.exec(sql_logs);
 
 // Create all the needed constants
 const args = minimist(process.argv.slice(2));
@@ -47,26 +56,42 @@ app.get('/', function(req, res) {
 });
 
 app.get('/homePage', function(req, res) {
-    res.render('gameMenu');
+    res.render('homePage');
 });
 
-// app.post('/homePage', function(req, res) {
-// 	const username = req.username;
-// 	const password = req.password;
+app.post('/homePage', function(req, res) {
+	const username = req.body.username;
+	const password = req.body.password;
 
-// 	const new_username = req.new_username;
-// 	const new_password = req.new_username;
+	const new_username = req.body.new_username;
+	const new_password = req.body.new_password;
 	
-// 	if (new_username == null && new_password == null) {
-// 		if ( ) {
-// 			res.redirect('/gamepage');
-// 		} else {
-// 			res.redirect('/invalid');
-// 		}
-// 	} else {
-// 		res.redirect('/accountcreate');
-// 	}
-// }
+	if (new_username == null && new_password == null) {
+		const stmt1 = db.prepare(`SELECT * FROM users WHERE username= ? and password= ?;`);
+		const exists = stmt1.run(username, password).get();
+		if (exists != undefined) {
+			res.redirect('/gameMenu');
+		} else {
+			res.redirect('/invalidLogin');
+		}
+	} else {
+		const stmt2 = db.prepare('INSERT INTO users (username, password) (?, ?)');
+		stmt2.run(new_username, new_password);
+		res.redirect('/newAccount');
+	}
+});
+
+app.get('/gameMenu', function(req, res) {
+	res.render('gameMenu');
+});
+
+app.get('/invalidLogin', function(req, res) {
+	res.render('invalidLogin')
+});
+
+app.get('/newAccount', function(req, res) {
+	res.render('newAccount')
+});
 
   
 // app.get('/app', function (req, res) {
