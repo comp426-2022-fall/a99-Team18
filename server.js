@@ -21,3 +21,21 @@ const port = args.port || 2000
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+// Create all endpoints for app, depending on what app becomes
+// ex. 
+// app.get('/homepage', function (req, res) {
+// res.redirect('/homepage');
+// })
+
+// Have to do ones with database, as well as all the other pages we want to go based
+// off of what is clicked. 
+
+// app.post('/homepage', function(req, res) {
+//    do something
+//    update database
+//    res.redirect('/homepage');
+// });
+
+
+app.listen(port)
+
