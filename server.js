@@ -4,6 +4,7 @@ import database from "better-sqlite3";
 import path from 'path';
 import {fileURLToPath} from 'url';
 //import { roshambo } from './lib/roshambo.js';
+import { magic8ball } from './lib/magic8ball.js';
 
 
 // // Create database
@@ -34,6 +35,7 @@ app.set('frontEndPages', path.join(__dirname, 'frontEndPages'));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.set('view engine', 'ejs');
 
 
 // Create all endpoints for app, depending on what app becomes
@@ -80,7 +82,8 @@ app.post('/tictactoe', function(req, res) {
 });
 
 app.post('/magic8ball', function(req, res) {
-    res.render('magic8ball')
+    var _res = magic8ball();
+    res.render('magic8ball', {res: _res});
 });
 
 
