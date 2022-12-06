@@ -95,8 +95,11 @@ app.post('/roshambo', function(req, res) {
 });
 
 app.post('/morra', function(req, res) {
-    //var _mRes = mora();
+    //var _mRes = mora(req.body.userguess, req.body.userfingers);
+    //it will probably be undef at first
     res.render('morra')
+    //renders, then use a submit for to get a URL encoded input
+    //parse the input into mora.js
 });
 
 // app.get('/morra/:guess/:fingers', function(req, res) {
