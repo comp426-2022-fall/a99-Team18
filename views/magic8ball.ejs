@@ -10,7 +10,7 @@
             <h3 style="top:-40%">Instructions: </h3>
             <h4 style="font-weight:normal">Ask the ball a question!</h4>
             <h4 style="font-weight:normal">Tap to receive an answer.</h4>
-            <button id="button" onclick="rollBall()" style="visibility: visible;" > Ask the ball</button>
+            <button id="button" onclick="rollBall();" style="visibility: visible;" > Ask the ball</button>
             <h4 id="here" style="visibility:hidden;">
                 <%= res %>
             </h4>
@@ -27,8 +27,12 @@
         <script>
             function rollBall() {
                 document.getElementById("here").style.visibility = "visible";
-                document.getElementById("reset").style.visibility = "visible";
-                document.getElementById("button").style.visibility = "hidden";
+                document.getElementById("button").innerHTML = "Try Again?";
+                document.getElementById("button").setAttribute("onclick", "resetForm();");
+            }
+
+            function resetForm() {
+                document.getElementById("reset").submit();
             }
         </script>
     </body>
