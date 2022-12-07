@@ -8,15 +8,27 @@
         <div class="main-page-layout">
             <h1>Welcome to the Arcade</h1>
             <h2>For Returning Users</h2>
-            <h3>Username: </h3>
-            <h3>Password: </h3>
-            <form method="post" action="/gameMenu">
+            <form method="post" action="/homepage">
+                <label for="username">Username:</label> 
+                <input type="text" name="username">
+            </form>
+            <form method="post" action="/homepage">
+                <label for="password"style="padding-right:3px">Password: </label> 
+                <input type="text" name="password">
+            </form>
+            <form method="post" action="/login">
                 <input type="submit" value="Login">
             </form>
             <h2>For New Users</h2>
-            <h3>Username: </h3>
-            <h3>Password: </h3>
-            <form method="post" action="/gameMenu">
+            <form method="post" action="/homepage">
+                <label for="new_username">New Username:</label> 
+                <input type="text" name="new_username">
+            </form>
+            <form method="post" action="/homepage">
+                <label for="new_password" style="padding-right:4px">New Password: </label> 
+                <input type="text" name="new_password">
+            </form>
+            <form method="post" action="/login">
                 <input type="submit" value="Login">
             </form>
         </div>
