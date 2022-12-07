@@ -8,28 +8,28 @@
         <div class="main-page-layout">
             <h1>Welcome to the Arcade</h1>
             <h2>For Returning Users</h2>
-            <form method="post" action="/homepage">
-                <label for="username">Username:</label> 
-                <input type="text" name="username" id="username">
-            </form>
-            <form method="post" action="/homepage">
-                <label for="password"style="padding-right:3px">Password: </label> 
-                <input type="text" name="password" id="password">
-            </form>
             <form method="post" action="/login">
+                <p>
+                    <label for="username">Username:</label> 
+                    <input type="text" name="username" id="username">
+                </p>
+                <p>
+                    <label for="password"style="padding-right:3px">Password: </label> 
+                    <input type="text" name="password" id="password">
+                </p>
                 <input type="submit" value="Login">
             </form>
             <h2>For New Users</h2>
-            <form method="post" action="/homepage">
-                <label for="new_username">New Username:</label> 
-                <input type="text" name="new_username" id="new_username">
-            </form>
-            <form method="post" action="/homepage">
-                <label for="new_password" style="padding-right:4px">New Password: </label> 
-                <input type="text" name="new_password" id="new_password">
-            </form>
             <form method="post" action="/login">
-                <input type="submit" value="Create New Account">
+                <p>
+                    <label for="new_username">New Username:</label> 
+                    <input type="text" name="new_username" id="new_username">
+                </p>
+                <p>
+                    <label for="new_password" style="padding-right:4px">New Password: </label> 
+                    <input type="text" name="new_password" id="new_password">
+                </p>
+                    <input type="submit" value="Create New Account">
             </form>
         </div>
     </body>
