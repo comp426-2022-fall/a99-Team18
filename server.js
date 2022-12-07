@@ -7,6 +7,7 @@ import {fileURLToPath} from 'url';
 import { magic8ball } from './lib/magic8ball.js';
 import { mora } from './lib/mora.js';
 import morgan from 'morgan';
+import fs from 'fs';
 
 
 // // Create database
@@ -21,10 +22,10 @@ if (row === undefined) {
 	const sql_users = `CREATE TABLE users (id INTEGER PRIMARY KEY, username VARCHAR, password VARCHAR);`
 	db.exec(sql_users);
 	
-	const sql_wins = `CREATE TABLE wins (id INTEGER PRIMARY KEY, user VARCHAR, game1 INTEGER, game2 INTEGER, game3 INTEGER, game4 INTEGER);`
+	const sql_wins = `CREATE TABLE wins (id INTEGER PRIMARY KEY, username VARCHAR, game1 INTEGER, game2 INTEGER, game3 INTEGER, game4 INTEGER);`
 	db.exec(sql_wins);
 	
-	const sql_logs = `CREATE TABLE accesslog (id INTEGER PRIMARY KEY, remote_addr VARCHAR, remote_user VARCHAR, date VARCHAR, method VARCHAR, url VARCHAR, http_version VARCHAR, status INTEGER, content_length VARCHAR, referer_url VARCHAR, user_agent VARCHAR);` 
+	const sql_logs = `CREATE TABLE accesslog (id INTEGER PRIMARY KEY, remote_addr VARCHAR, remote_user VARCHAR, date VARCHAR, method VARCHAR, url VARCHAR, protocol VARCHAR, http_version VARCHAR, status INTEGER);` 
 	db.exec(sql_logs);
 }
 
@@ -45,18 +46,25 @@ app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
 //Create access log and put in database using morgan TODO: need to fix
-// const accesslog = fs.createWriteStream( './access.log', { flags: 'a'});
+const accesslog = fs.createWriteStream( './access.log', { flags: 'a'});
 
-// app.use(morgan('combined', { stream: accesslog }));
+app.use(morgan('combined', { stream: accesslog }));
 
-// app.use((req, res, next) => {
-// 	let logdata = {
-
-// 	}
-// 	const stmt_log = db.prepare(`INSERT INTO accesslog ()`);
-// 	const info = stmt_log.run();
-// 	next();
-// });
+app.use((req, res, next) => {
+	let logdata = {
+		remote_addr: req.ip,
+        remote_user: req.user,
+        date: Date.now(),
+        method: req.method,
+        url: req.url,
+        protocol: req.protocol,
+        http_version: req.httpVersion,
+        status: res.statusCode
+	}
+	const stmt_log = db.prepare(`INSERT INTO accesslog (remote_addr, remote_user, date, method, url, protocol, http_version, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`);
+	const info = stmt_log.run(logdata.remote_addr, logdata.remote_user, logdata.date, logdata.method, logdata.url, logdata.protocol, logdata.http_version, logdata.status);
+	next();
+});
 
 
 // Create all endpoints for app, depending on what app becomes
@@ -83,7 +91,11 @@ app.get('/homePage', function(req, res) {
 });
 
 app.post('/homePage', function(req, res) {
-    res.render('homePage')
+    res.render('homePage');
+});
+
+app.post('/gameMenu', function(req, res) {
+	res.render('gameMenu');
 });
 
 
@@ -114,7 +126,7 @@ app.post('/magic8ball', function(req, res) {
 });
 
 
-
+var curr_user; //Global variable for username
 app.post('/login', function(req, res) {
 	const username = req.body.username;
 	const password = req.body.password;
@@ -123,6 +135,7 @@ app.post('/login', function(req, res) {
 	if (exists === undefined) {
 		res.render('invalidLogin');
 	} else {
+		curr_user = username;
 		res.render('gameMenu');
 	}
 });
@@ -132,55 +145,55 @@ app.post('/newlogin', function(req, res) {
 	const new_password = req.body.new_password;
 	
 	const makeNew = db.prepare(`INSERT INTO users (username, password) VALUES ('${new_username}', '${new_password}');`);
+	const makeBlank = db.prepare(`INSERT INTO wins (username, game1, game2, game3, game4) VALUES ('${new_username}', '0', '0', '0', '0');`);
 	makeNew.run();
+	makeBlank.run();
 	res.render('newAccount');
 });
 
 app.post('/roshamboWin', function(req, res) {
-	let curr_user = req.app.get(username);
-	const stmt1 = db.prepare(`SELECT game1 FROM wins WHERE user = ?;`);
-	var newWins = stmt2.run(curr_user).get() + 1;
+	let newWins = db.prepare(`SELECT game1 FROM wins WHERE username = '${curr_user}';`).get() + 1;
 
-	const stmt2 = db.prepare(`INSERT INTO wins (game1) (?);`);
-	stmt2.run(newWins);
+	const stmt = db.prepare(`INSERT INTO wins (game1) ('${newWins}');`);
+	stmt.run();
 });
 
 app.post('/morraWin', function(req, res) {
-	let curr_user = req.app.get(username);
-	var morraWins = req.app.get(guess);
-	const stmt1 = db.prepare(`SELECT game2 FROM wins WHERE user = ?;`);
-	var newWins = stmt2.run(curr_user).get() + morraWins;
+	var morraWins = req.body.guess;
+	let newWins = db.prepare(`SELECT game2 FROM wins WHERE username = '${curr_user}';`).get() + morraWins;
 
-	const stmt2 = db.prepare(`INSERT INTO wins (game2) (?);`);
-	stmt2.run(newWins);
+	const stmt = db.prepare(`INSERT INTO wins (game2) ('${newWins}');`);
+	stmt.run();
 });
 
 app.post('/magic8ballWin', function(req, res) {
-	let curr_user = req.app.get(username);
-	const stmt1 = db.prepare(`SELECT game4 FROM wins WHERE user = ?;`);
-	var newWins = stmt2.run(curr_user).get() + 1;
+	let newWins = db.prepare(`SELECT game4 FROM wins WHERE username = '${curr_user}';`).get() + 1;
 
-	const stmt2 = db.prepare(`INSERT INTO wins (game4) (?);`);
-	stmt2.run(newWins);
+	const stmt = db.prepare(`INSERT INTO wins (game4) ('${newWins}');`);
+	stmt.run();
 });
 
 app.post('/tictactoeWin', function(req, res) {
-	let curr_user = req.app.get(username);
-	const stmt1 = db.prepare(`SELECT game3 FROM wins WHERE user = ?;`);
-	var newWins = stmt2.run(curr_user).get() + 1;
+	let newWins = db.prepare(`SELECT game3 FROM wins WHERE username = '${curr_user}';`).get() + 1;
 
-	const stmt2 = db.prepare(`INSERT INTO wins (game3) (?);`);
-	stmt2.run(newWins);
+	const stmt = db.prepare(`INSERT INTO wins (game3) ('${newWins}');`);
+	stmt.run();
 });
 
 
 app.get('/database', function(req, res) {
 	const stmt = db.prepare(`SELECT * FROM users;`);
 	res.send(stmt.all())
-})
+});
+
+app.get('/database2', function(req, res) {
+	const stmt = db.prepare(`SELECT * FROM wins;`);
+	res.send(stmt.all())
+});
   
-// app.get('/app', function (req, res) {
-//     res.redirect('/homePage');
-// })
+app.get('/database3', function(req, res) {
+	const stmt = db.prepare(`SELECT * FROM accesslog;`);
+	res.send(stmt.all())
+});
 
 app.listen(port)
