@@ -121,7 +121,7 @@ app.post('/login', function(req, res) {
 
 	const exists = db.prepare(`SELECT * FROM users WHERE username= '${username}' and password= '${password}';`).get();
 	if (exists === undefined) {
-		res.render('/invalidLogin');
+		res.render('invalidLogin');
 	} else {
 		res.render('gameMenu');
 	}
@@ -173,10 +173,6 @@ app.post('/tictactoeWin', function(req, res) {
 	stmt2.run(newWins);
 });
 
-
-app.get('/newAccount', function(req, res) {
-	res.render('newAccount')
-});
 
 app.get('/database', function(req, res) {
 	const stmt = db.prepare(`SELECT * FROM users;`);
