@@ -6,7 +6,7 @@ import {fileURLToPath} from 'url';
 //import { roshambo } from './lib/roshambo.js';
 import { magic8ball } from './lib/magic8ball.js';
 import { mora } from './lib/mora.js';
-//import morgan from 'morgan';
+import morgan from 'morgan';
 
 
 // // Create database
