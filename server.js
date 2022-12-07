@@ -133,7 +133,7 @@ app.post('/login', function(req, res) {
 			res.redirect('/gameMenu');
 		}
 	} else {
-		const makeNew = db.prepare(`INSERT INTO users (username, password) ('${new_username}', '${new_password}')`);
+		const makeNew = db.prepare(`INSERT INTO users (username, password) VALUES ('${new_username}', '${new_password}')`);
 		makeNew.run();
 		res.redirect('/newAccount');
 	}
