@@ -103,19 +103,9 @@ app.post('/roshambo', function(req, res) {
     res.render('roshambo');
 });
 
-// app.post('/morra', function(req, res) {
-//     //var _mRes = mora(req.body.userguess, req.body.userfingers);
-//     //it will probably be undef at first
-//     res.render('morra', {input: "", sum: "" ,res: "", outcome: ""})
-//     //renders, then use a submit for to get a URL encoded input
-//     //parse the input into mora.js
-// });
-
 app.post('/morra', function(req, res) {
     var userGuess = parseInt(req.body.guess);
-    //console.log(userGuess);
     var userFingers = parseInt(req.body.fingers);
-    //console.log(userFingers);
     var _mRes = mora(userGuess, userFingers);
     res.render('morra', {input: userFingers, sum: _mRes.sum, res: _mRes.res, outcome: _mRes.output})
 });
