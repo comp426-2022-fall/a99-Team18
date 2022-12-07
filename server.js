@@ -118,27 +118,27 @@ app.post('/magic8ball', function(req, res) {
 
 
 
-// app.post('/homePage', function(req, res) {
-// 	const username = req.body.username;
-// 	const password = req.body.password;
+app.post('/login', function(req, res) {
+	const username = req.body.username;
+	const password = req.body.password;
 
-// 	const new_username = req.body.new_username;
-// 	const new_password = req.body.new_password;
+	const new_username = req.body.new_username;
+	const new_password = req.body.new_password;
 	
-// 	if (new_username == null && new_password == null) {
-// 		const stmt1 = db.prepare(`SELECT * FROM users WHERE username= ? and password= ?;`);
-// 		const exists = stmt1.run(username, password).get();
-// 		if (exists != undefined) {
-// 			res.redirect('/gameMenu');
-// 		} else {
-// 			res.redirect('/invalidLogin');
-// 		}
-// 	} else {
-// 		const stmt2 = db.prepare('INSERT INTO users (username, password) (?, ?)');
-// 		stmt2.run(new_username, new_password);
-// 		res.redirect('/newAccount');
-// 	}
-// });
+	if (new_username == null && new_password == null) {
+		const stmt1 = db.prepare(`SELECT * FROM users WHERE username= ? and password= ?;`);
+		const exists = stmt1.run(username, password).get();
+		if (exists != undefined) {
+			res.redirect('/gameMenu');
+		} else {
+			res.redirect('/invalidLogin');
+		}
+	} else {
+		const stmt2 = db.prepare('INSERT INTO users (username, password) (?, ?)');
+		stmt2.run(new_username, new_password);
+		res.redirect('/newAccount');
+	}
+});
 
 app.post('/roshamboWin', function(req, res) {
 	let curr_user = req.app.get(username);
@@ -151,8 +151,9 @@ app.post('/roshamboWin', function(req, res) {
 
 app.post('/morraWin', function(req, res) {
 	let curr_user = req.app.get(username);
+	var morraWins = req.app.get(guess);
 	const stmt1 = db.prepare(`SELECT game2 FROM wins WHERE user = ?`);
-	var newWins = stmt2.run(curr_user).get() + 1;
+	var newWins = stmt2.run(curr_user).get() + morraWins;
 
 	const stmt2 = db.prepare('INSERT INTO wins (game2) (?)');
 	stmt2.run(newWins);
