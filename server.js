@@ -165,6 +165,7 @@ app.post('/roshamboWin', function(req, res) {
 
 	const stmt = db.prepare(`UPDATE wins SET game1 = '${winsRecord.game1}' WHERE username = '${curr_user}';`);
 	stmt.run();
+	res.render('roshambo');
 });
 
 app.post('/morraWin', function(req, res) {

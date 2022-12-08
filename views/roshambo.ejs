@@ -98,6 +98,7 @@
                 <h4 style="font-weight:normal">1. A classic game of rock paper scissors shoot. </h4>
                 <h4 style="font-weight:normal">2. Choose which option you would like to throw. </h4>
                 <h4 style="font-weight:normal">3. Recieve a point for every match won. </h4>
+                <h4 style="font-weight:normal">4. Make sure to hit play again to update total points.</h4>
             </div>
         </div>
         <div style="position:absolute;left:400px;top:120px">
@@ -128,17 +129,13 @@
 
         <img id="white" src="../grey.jpg" height = "180px" width = "150px" style="position: absolute;left:950px;top:315px"/>
 
-
-        <input type = "button" onclick="roshambo()" value = "     Play      " id ="1" style="position:absolute;left:750px;top:395px;z-index:1;">
-
-        <input type = "button" onclick="change()" value = "Play Again" id ="2" style="position:absolute;left:750px;top:395px;z-index:-1;">
-
-        <form method="post" action="/roshamboWin">
-            <input type="submit" onclick="change()" id="3" value="Play Again 5555" style="position:absolute;left:750px;top:395px;z-index:-1;">
+        <input type = "submit" onclick="roshambo()" value = "     Play      " id ="1" style="position:absolute;left:750px;top:395px;z-index:1;">
+        <form method="post" action="/roshambo">
+            <input type = "submit" onclick="change()" value = "Play Again" id ="2" style="position:absolute;left:750px;top:395px;z-index:-1;">
         </form>
-
-
-
+        <form method="post" action="/roshamboWin">
+            <input type="submit" onclick="change()" id="3" value="Play Again" style="position:absolute;left:750px;top:395px;z-index:-1;">
+        </form>
 
         <h1 id="win" style="position: absolute;left:1175px;top:375px"></h1>
     </body>
