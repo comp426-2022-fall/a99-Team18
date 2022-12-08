@@ -6,7 +6,7 @@
     </head>
     <body>
         <div class="main-page-layout" style="z-index:-1">
-            <h1>Magic 8 Ball</h1>
+            <h1 style="padding-top:10px">Magic 8 Ball</h1>
             <h3 style="top:-40%">Instructions: </h3>
             <h4 style="font-weight:normal">Ask the ball a question!</h4>
             <h4 style="font-weight:normal">Tap to receive an answer. Make sure to hit play again to update points.</h4>
@@ -14,7 +14,7 @@
             <input type="submit" id="button" onclick="rollBall();" value="Ask the Ball" style="z-index: 1;">
             
             <form method="post" action="/magic8ballWin">
-                <input type="submit" id="2" style="z-index:-1;position:absolute;left:635px;top:216px;"value=" Play Again "> 
+                <input type="submit" id="2" style="z-index:-1;position:absolute;left:635px;top:226px;"value=" Play Again "> 
             </form>
 
             <h4 id="here" style="visibility:hidden;position:absolute;top:440px;left:628px;z-index:1;color: white;">
@@ -26,6 +26,9 @@
         <div>
             <form method="post" action="/gameMenu" style="text-align:center;margin:auto;width:50%;z-index:1;">
                 <input type="submit" value="Return to Game Menu">
+            </form>
+            <form method="post" action="/databaseDisplay" style="text-align:center;margin:auto;width:50%;z-index:1;">
+                <input type="submit" value="View Scoreboard">
             </form>
         </div>
         <script>

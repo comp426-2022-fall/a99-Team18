@@ -180,7 +180,7 @@ app.post('/morraWin', function(req, res) {
 		const stmt = db.prepare(`UPDATE wins SET game2 = '${winsRecord.game2}' WHERE username = '${curr_user}';`);
 		stmt.run();
 	}
-    res.render('morra', {input: userFingers, sum: _mRes.sum, res: _mRes.res, outcome: _mRes.output})
+    res.render('morra', {input: userFingers, sum: _mRes.sum, res: _mRes.res, outcome: _mRes.output});
 });
 
 app.post('/magic8ballWin', function(req, res) {
@@ -198,6 +198,15 @@ app.post('/tictactoeWin', function(req, res) {
 
 	const stmt = db.prepare(`UPDATE wins SET game3 = '${winsRecord.game3}' WHERE username = '${curr_user}';`);
 	stmt.run();
+});
+
+app.post('/databaseDisplay', function(req,res) {
+	let winsRecord = db.prepare(`SELECT * FROM wins WHERE username = '${curr_user}';`).get();
+	var rps = winsRecord.game1;
+	var mor = winsRecord.game2;
+	var ttt = winsRecord.game3;
+	var bal = winsRecord.game4;
+	res.render('databaseDisplay', {rps:rps, mor:mor,ttt:ttt,bal:bal});
 });
 
 

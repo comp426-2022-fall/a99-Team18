@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>gameMenu</title>
+        <link rel="stylesheet" href="styling.css">
+    </head>
+    <body>
+        <div class="game-menu-layout" style="top:2.5%;left:2.5%;z-index:-1;">
+            <h1>Rock Paper Scissors Points:</h1>
+            <h5 style="position:relative;top:-380px"><%= rps%></h5> 
+        </div>
+        <div class="game-menu-layout" style="top:2.5%;right:2.5%;z-index:-1;">
+            <h1>Morra Points:</h1>
+            <h5 style="position:relative;top:-380px"><%= mor%></h5>
+        </div>
+        <div class="game-menu-layout" style="bottom:2.5%;left:2.5%">
+            <h1>Tic Tac Toe Points:</h1>
+            <h5 style="position:relative;top:-380px"><%= ttt%></h5>
+        </div>
+        <div class="game-menu-layout" style="bottom:2.5%;right:2.5%">
+            <h1>Magic 8 Ball Points:</h1>
+            <h5 style="position:relative;top:-380px"><%= bal%></h5>
+        </div>
+        <div>
+            <form method="post" action="/gameMenu" style="text-align:center;margin:auto;width:50%;z-index:1;">
+                <input type="submit" value="Return to Game Menu">
+            </form>
+        </div>
+    </body>
+</html>

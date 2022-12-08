@@ -46,6 +46,10 @@ body {background-color: #9c9b98}
         font-size: 15px;
         color: black;
     }
+    .game-menu-layout h5 {
+        font-size: 230px;
+        color: black;
+    }
 
 input[type=submit] {
     background-color: #DCDCDC;
