@@ -19,15 +19,15 @@ A web application that lets people play minigames. Users create an account that 
 
 ## Dependancies
 
-better-sqlite3: 8.0.0
-consolidate: 0.16.0
-ejs: 3.1.8
-express: 4.18.2
-fs: 0.0.1-security
-minimist: 1.2.7
-morgan: 1.10.0
-path: 0.12.7
-url: 0.11.0
+better-sqlite3: 8.0.0\
+consolidate: 0.16.0\
+ejs: 3.1.8\
+express: 4.18.2\
+fs: 0.0.1-security\
+minimist: 1.2.7\
+morgan: 1.10.0\
+path: 0.12.7\
+url: 0.11.0\
 
 ## Notes
 
