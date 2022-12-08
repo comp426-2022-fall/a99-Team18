@@ -1,9 +1,37 @@
+Dec 2, 2022
+    - Reach out to group and get communication settled
+    - Delegate some time and material towards brainstorming
+
 Dec 4, 2022
     - Ankit attempts to update the license but doesn't have the permissions
     - Keaw updates permissions
+    - David and Ankit able to commit changes without requests
 
 Dec 5, 2022
-    - At some point Ankit and "DaverinoXD" decide to move forward with a minigame app that holds a database of points and users
+    - The group decides to move forward with a minigame app that holds a database of points and users
     - They add rock paper scissors
     - Keaw adds odds and evens, Mora, and tic tac toe to the games.
     - Keaw adds a magic 8 ball generator.
+    - David starts working on front-end design
+    - Ankit works on api endpoints as well as databases
+
+Dec 6, 2022
+    - Finish our working functions for most of our mini games
+    - Decide (most likely) tic tac toe will be part of a future development
+    - Have a basic interface structure for the different game files
+    - Have some basic api endpoint functionality hooked up for two pages
+    - Database research spearheaded and starting to be implemented
+
+Dec 7, 2022
+    - All api endpoints are functional on localhost
+    - All interfaces are fully designed and fully functional based off their intentions
+    - Databases are created and connected to app.posts to update based off of interaction
+    - Backend api connections with databases and interfaces are fully connected
+    - App works like it is expected too, only miniscule changes and changes unrelated to code left
+    - Documented all api endpoints in /docs
+
+Dec 8, 2022
+    - Updated readMe to display proper instructions and descriptions for app
+    - Recorded demo video and included in readMe
+    - Final checks for functionality
+    - Final project committed for last time and submitted :)
