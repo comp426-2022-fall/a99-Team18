@@ -8,6 +8,7 @@ import { magic8ball } from './lib/magic8ball.js';
 import { mora } from './lib/mora.js';
 import morgan from 'morgan';
 import fs from 'fs';
+import { tictactoe_response } from './lib/tictactoe.js';
 
 
 // // Create database
@@ -111,7 +112,21 @@ app.post('/morra', function(req, res) {
 });
 
 app.post('/tictactoe', function(req, res) {
-    res.render('tictactoe')
+    var boardState = "NNNNNNNNN";
+    var select = null;
+    var newBoard = tictactoe_response(boardState, select);
+    res.render('tictactoe', {board: newBoard, zero: newBoard[0], one: newBoard[1], two: newBoard[2],
+                                             three: newBoard[3], four: newBoard[4], five: newBoard[5],
+                                             six: newBoard[6], seven: newBoard[7], eight: newBoard[8]})
+});
+
+app.post('/tictactoe', function(req, res) {
+    var boardState = req.body.board;
+    var select = parseInt(req.body.input)
+    var newBoard = tictactoe_response(boardState, select);
+    res.render('tictactoe', {board: newBoard, zero: newBoard[0], one: newBoard[1], two: newBoard[2],
+                                             three: newBoard[3], four: newBoard[4], five: newBoard[5],
+                                             six: newBoard[6], seven: newBoard[7], eight: newBoard[8]})
 });
 
 app.post('/magic8ball', function(req, res) {

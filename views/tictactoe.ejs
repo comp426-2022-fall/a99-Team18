@@ -1,9 +1,4 @@
 <!DOCTYPE html>
-<style>
-    table, th, td {
-      border:1px solid black;
-    }
-    </style>
 <html lang="en">
     <head>
         <title>Tic Tac Toe</title>
@@ -21,29 +16,50 @@
             <h3 style="top:-40%">Instructions: </h3>
             <h4 style="font-weight:normal">A classic game of tic tac toe.</h4>
             <h4 style="font-weight:normal">Click Start or tap to play that position!</h4>
-            <h4 style="font-weight:normal; visibility: hidden;">    </h4>
-            <table style="width:50%; height:50%; margin:auto">
+            <h4 style="font-weight:normal; visibility: hidden;" id="state"><%=board%></h4>
+            <table style="width:30%; height:55%; margin:auto">
                 <tr>
-                  <th>          </th>
-                  <th>          </th>
-                  <th>          </th>
+                  <th><button class="block" id="zero" onclick="x('zero'); setInput('0');"><%=zero%></button></th>
+                  <th><button class="block" id="one" onclick="x('one'); setInput('1');"><%=one%></button></th>
+                  <th><button class="block" id="two" onclick="x('two'); setInput('2');"><%=two%></button></th>
                 </tr>
                 <tr>
-                  <td>          </td>
-                  <td>          </td>
-                  <td>          </td>
+                  <td><button class="block" id="three" onclick="x('three'); setInput('3');"><%=three%></button></td>
+                  <td><button class="block" id="four" onclick="x('four'); setInput('4');"><%=four%></button></td>
+                  <td><button class="block" id="five" onclick="x('five'); setInput('5');"><%=five%></button></td>
                 </tr>
                 <tr>
-                  <td>          </td>
-                  <td>          </td>
-                  <td>          </td>
+                  <td><button class="block" id="six" onclick="x('six'); setInput('6');"><%=six%></button></td>
+                  <td><button class="block"id="seven" onclick="x('seven'); setInput('7');"><%=seven%></button></td>
+                  <td><button class="block" id="eight" onclick="x('eight'); setInput('8');"><%=eight%></button></td>
                 </tr>
               </table>
+              <form id= "reload" method="post" action="/tictactoe" style="visibility: hidden;">
+                <input type="number" name="input" id="input">
+                <input type="text" name="board" id="board">
+                <input type="submit"> 
+              </form>
         </div>
         <div>
             <form method="post" action="/gameMenu" style="text-align:center;margin:auto;width:50%;z-index:1;">
                 <input type="submit" value="Return to Game Menu">
             </form>
         </div>
+        <script>
+            function setInput(num) {
+                document.getElementById("input").setAttribute("value", num);
+                //document.getElementById("input").setAttribute("innerHTML", num);
+                var _state = document.getElementById("state").innerHTML;
+                document.getElementById("board").setAttribute("value", _state);
+                //document.getElementById("board").setAttribute("innerHTML", _state);
+                document.getElementById("reload").submit();
+            }
+            function x(id) {
+                document.getElementById(id).innerHTML = "X";
+            }
+            function o(id) {
+                document.getElementById(id).innerHTML = "O";
+            }
+        </script>
     </body>
 </html>
