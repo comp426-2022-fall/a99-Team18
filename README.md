@@ -27,7 +27,7 @@ fs: 0.0.1-security\
 minimist: 1.2.7\
 morgan: 1.10.0\
 path: 0.12.7\
-url: 0.11.0\
+url: 0.11.0
 
 ## Notes
 
