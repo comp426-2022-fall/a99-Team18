@@ -17,7 +17,7 @@ A web application that lets people play minigames. Users create an account that 
 
 ## Video Demonstration
 
-To see our demonstration, please click [here](https://www.youtube.com/watch?v=RY_cmW2vhiY)
+To see our demonstration video, please click [here](https://www.youtube.com/watch?v=RY_cmW2vhiY)
 
 ## Dependancies
 
