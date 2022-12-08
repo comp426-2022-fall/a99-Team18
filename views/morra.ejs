@@ -8,8 +8,8 @@
         <div class="main-page-layout" style="z-index:-1">
             <h1>Morra</h1>
             <h3 style="top:-40%">Instructions: </h3>
-            <h4 style="font-weight:normal">Guess what the sum of your fingers are!</h4>
-            <h4 style="font-weight:normal">Select how many fingers you are holding up.</h4>
+            <h4 style="font-weight:normal">Guess what the sum of total fingers are!</h4>
+            <h4 style="font-weight:normal">Select how many fingers you are holding up, and guess how many are held up between you and your opponent.</h4>
             <h4 style="font-weight:normal">If you guess right, you win that many points!</h4>
             <div>
                 <form method="post" action="/morra">
@@ -25,7 +25,8 @@
                     <input type="submit" value="Play!">
                 </form>
             </div>
-            <h1> Your Hand: <%= input%> + <%= outcome%></h1>
+            <h1>Your Hand: <%= input%></h1> 
+            <h1>Opponent: <%= outcome%></h1>
             <h1>Sum: <%= sum%></h1>
             <h4 style="font-weight:normal"><%= res%></h4>
         </div>

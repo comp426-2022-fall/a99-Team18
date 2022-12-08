@@ -175,6 +175,7 @@ app.post('/morraWin', function(req, res) {
 
 	const stmt = db.prepare(`UPDATE wins SET game2 = '${winsRecord.game2}' WHERE username = '${curr_user}';`);
 	stmt.run();
+	res.render('morra')
 });
 
 app.post('/magic8ballWin', function(req, res) {
