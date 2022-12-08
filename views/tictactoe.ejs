@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<style>
+    table, th, td {
+      border:1px solid black;
+    }
+    </style>
 <html lang="en">
     <head>
         <title>Tic Tac Toe</title>
@@ -10,6 +15,30 @@
             <h3 style="top:-40%">Instructions: </h3>
             <h4 style="font-weight:normal">A classic game of tic tac toe.</h4>
             <h4 style="font-weight:normal">Click Start or tap to play that position! </h4>
+        </div>
+        <div class="main-page-layout" style="z-index:-1">
+            <h1>Tic Tac Toe</h1>
+            <h3 style="top:-40%">Instructions: </h3>
+            <h4 style="font-weight:normal">A classic game of tic tac toe.</h4>
+            <h4 style="font-weight:normal">Click Start or tap to play that position!</h4>
+            <h4 style="font-weight:normal; visibility: hidden;">    </h4>
+            <table style="width:50%; height:50%; margin:auto">
+                <tr>
+                  <th>          </th>
+                  <th>          </th>
+                  <th>          </th>
+                </tr>
+                <tr>
+                  <td>          </td>
+                  <td>          </td>
+                  <td>          </td>
+                </tr>
+                <tr>
+                  <td>          </td>
+                  <td>          </td>
+                  <td>          </td>
+                </tr>
+              </table>
         </div>
         <div>
             <form method="post" action="/gameMenu" style="text-align:center;margin:auto;width:50%;z-index:1;">
