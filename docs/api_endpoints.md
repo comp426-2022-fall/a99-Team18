@@ -1,6 +1,9 @@
 # API Endpoints 
 
-## app.post('/')
+## app.get('/')
+Redirects to app.get('/homePage') - App directs to get homepage upon launch
+
+## app.get('/app')
 Redirects to app.get('/homePage') - App directs to get homepage upon launch
 
 ## app.get('/homePage')
