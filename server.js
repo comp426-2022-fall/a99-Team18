@@ -134,8 +134,7 @@ app.post('/magic8ball', function(req, res) {
     res.render('magic8ball', {res: _res});
 });
 
-
-var curr_user; //Global variable for username
+var curr_user;
 app.post('/login', function(req, res) {
 	const username = req.body.username;
 	const password = req.body.password;
@@ -161,31 +160,35 @@ app.post('/newlogin', function(req, res) {
 });
 
 app.post('/roshamboWin', function(req, res) {
-	let newWins = db.prepare(`SELECT game1 FROM wins WHERE username = '${curr_user}';`).get() + 1;
+	let winsRecord = db.prepare(`SELECT * FROM wins WHERE username = '${curr_user}';`).get();
+	winsRecord.game1 += 1;
 
-	const stmt = db.prepare(`INSERT INTO wins (game1) ('${newWins}');`);
+	const stmt = db.prepare(`UPDATE wins SET game1 = '${winsRecord.game1}' WHERE username = '${curr_user}';`);
 	stmt.run();
 });
 
 app.post('/morraWin', function(req, res) {
 	var morraWins = req.body.guess;
-	let newWins = db.prepare(`SELECT game2 FROM wins WHERE username = '${curr_user}';`).get() + morraWins;
+	let winsRecord = db.prepare(`SELECT * FROM wins WHERE username = '${curr_user}';`).get();
+	winsRecord.game1 += morraWins;
 
-	const stmt = db.prepare(`INSERT INTO wins (game2) ('${newWins}');`);
+	const stmt = db.prepare(`UPDATE wins SET game2 = '${winsRecord.game2}' WHERE username = '${curr_user}';`);
 	stmt.run();
 });
 
 app.post('/magic8ballWin', function(req, res) {
-	let newWins = db.prepare(`SELECT game4 FROM wins WHERE username = '${curr_user}';`).get() + 1;
+	let winsRecord = db.prepare(`SELECT * FROM wins WHERE username = '${curr_user}';`).get();
+	winsRecord.game4 += 1;
 
-	const stmt = db.prepare(`INSERT INTO wins (game4) ('${newWins}');`);
+	const stmt = db.prepare(`UPDATE wins SET game4 = '${winsRecord.game4}' WHERE username = '${curr_user}';`);
 	stmt.run();
 });
 
 app.post('/tictactoeWin', function(req, res) {
-	let newWins = db.prepare(`SELECT game3 FROM wins WHERE username = '${curr_user}';`).get() + 1;
+	let winsRecord = db.prepare(`SELECT * FROM wins WHERE username = '${curr_user}';`).get();
+	winsRecord.game3 += 1;
 
-	const stmt = db.prepare(`INSERT INTO wins (game3) ('${newWins}');`);
+	const stmt = db.prepare(`UPDATE wins SET game3 = '${winsRecord.game3}' WHERE username = '${curr_user}';`);
 	stmt.run();
 });
 
