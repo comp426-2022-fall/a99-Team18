@@ -168,14 +168,19 @@ app.post('/roshamboWin', function(req, res) {
 	res.render('roshambo');
 });
 
-app.post('/morraWin', function(req, res) {
-	var morraWins = req.body.guess;
-	let winsRecord = db.prepare(`SELECT * FROM wins WHERE username = '${curr_user}';`).get();
-	winsRecord.game1 += morraWins;
 
-	const stmt = db.prepare(`UPDATE wins SET game2 = '${winsRecord.game2}' WHERE username = '${curr_user}';`);
-	stmt.run();
-	res.render('morra')
+app.post('/morraWin', function(req, res) {
+    var userGuess = parseInt(req.body.guess);
+    var userFingers = parseInt(req.body.fingers);
+    var _mRes = mora(userGuess, userFingers);
+	if (_mRes.res == "WIN!") {
+		let winsRecord = db.prepare(`SELECT * FROM wins WHERE username = '${curr_user}';`).get();
+		winsRecord.game2 += userGuess;//morraWins;
+	
+		const stmt = db.prepare(`UPDATE wins SET game2 = '${winsRecord.game2}' WHERE username = '${curr_user}';`);
+		stmt.run();
+	}
+    res.render('morra', {input: userFingers, sum: _mRes.sum, res: _mRes.res, outcome: _mRes.output})
 });
 
 app.post('/magic8ballWin', function(req, res) {

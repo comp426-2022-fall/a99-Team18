@@ -12,7 +12,7 @@
             <h4 style="font-weight:normal">Select how many fingers you are holding up, and guess how many are held up between you and your opponent.</h4>
             <h4 style="font-weight:normal">If you guess right, you win that many points!</h4>
             <div>
-                <form method="post" action="/morra">
+                <form method="post" action="/morraWin">
                     Guess: <input type="text" id="guess" name="guess" value=""><br>
                     <label for="fingers">Fingers:</label>
                     <select id="fingers" name="fingers">
@@ -22,12 +22,21 @@
                         <option value="4">4</option>
                         <option value="5">5</option>
                     </select>
-                    <input type="submit" value="Play!">
+                    <input type="submit" id = "1111" value=" Play! " style="z-index:1;">
                 </form>
             </div>
-            <h1>Your Hand: <%= input%></h1> 
-            <h1>Opponent: <%= outcome%></h1>
-            <h1>Sum: <%= sum%></h1>
+
+            <form method="post" action = "/morra">
+                <input type="submit" id = "2222" value="Again" style="z-index:-1;position:absolute;top:276px;left:707px">
+            </form>
+
+            <form method="post" action = "/morraWin">
+                <input type="submit" id = "3333" value="Again" style="z-index:-1;position: absolute;top:276px;left:707px">
+            </form>
+
+            <h1 id = "4">Your Hand: <%= input%></h1> 
+            <h1 id = "5">Opponent: <%= outcome%></h1>
+            <h1 id = "6">Sum: <%= sum%></h1>
             <h4 style="font-weight:normal"><%= res%></h4>
         </div>
         <div>
@@ -35,5 +44,6 @@
                 <input type="submit" value="Return to Game Menu">
             </form>
         </div>
+        <script type="module" src="../server.js"></script>
     </body>
 </html>
