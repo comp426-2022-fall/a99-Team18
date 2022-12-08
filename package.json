@@ -8,7 +8,7 @@
   },
   "type": "module",
   "scripts": {
-    "test": "*****unknown*****"
+    "test": "node server.js --port=4321"
   },
   "repository": {
     "type": "git",

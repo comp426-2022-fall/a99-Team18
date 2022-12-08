@@ -67,25 +67,13 @@ app.use((req, res, next) => {
 	next();
 });
 
-
-// Create all endpoints for app, depending on what app becomes
-// ex. 
-// app.get('/homepage', function (req, res) {
-// res.redirect('/homepage');
-// })
-
-// Have to do ones with database, as well as all the other pages we want to go based
-// off of what is clicked. 
-
-// app.post('/homepage', function(req, res) {
-//    do something
-//    update database
-//    res.redirect('/homepage');
-// });
-
 app.get('/', function(req, res) {
     res.redirect('/homePage');
 });
+
+app.get('/app', function (req, res) {
+    res.redirect('/homePage');
+})
 
 app.get('/homePage', function(req, res) {
     res.render('homePage');
@@ -120,18 +108,17 @@ app.post('/tictactoe', function(req, res) {
                                              six: newBoard[6], seven: newBoard[7], eight: newBoard[8]})
 });
 
-app.post('/tictactoe', function(req, res) {
-    var boardState = req.body.board;
-    var select = parseInt(req.body.input)
-    var newBoard = tictactoe_response(boardState, select);
-    res.render('tictactoe', {board: newBoard, zero: newBoard[0], one: newBoard[1], two: newBoard[2],
-                                             three: newBoard[3], four: newBoard[4], five: newBoard[5],
-                                             six: newBoard[6], seven: newBoard[7], eight: newBoard[8]})
-});
+// app.post('/tictactoe', function(req, res) {
+//     var boardState = req.body.board;
+//     var select = parseInt(req.body.input)
+//     var newBoard = tictactoe_response(boardState, select);
+//     res.render('tictactoe', {board: newBoard, zero: newBoard[0], one: newBoard[1], two: newBoard[2],
+//                                              three: newBoard[3], four: newBoard[4], five: newBoard[5],
+//                                              six: newBoard[6], seven: newBoard[7], eight: newBoard[8]})
+// });
 
 app.post('/magic8ball', function(req, res) {
-    var _res = magic8ball();
-    res.render('magic8ball', {res: _res});
+    res.render('magic8ball');
 });
 
 var curr_user;
@@ -198,6 +185,7 @@ app.post('/tictactoeWin', function(req, res) {
 
 	const stmt = db.prepare(`UPDATE wins SET game3 = '${winsRecord.game3}' WHERE username = '${curr_user}';`);
 	stmt.run();
+	res.render('tictactoe');
 });
 
 app.post('/databaseDisplay', function(req,res) {
