@@ -183,6 +183,7 @@ app.post('/magic8ballWin', function(req, res) {
 
 	const stmt = db.prepare(`UPDATE wins SET game4 = '${winsRecord.game4}' WHERE username = '${curr_user}';`);
 	stmt.run();
+	res.render('magic8ball');
 });
 
 app.post('/tictactoeWin', function(req, res) {

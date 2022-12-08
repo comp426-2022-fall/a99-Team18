@@ -10,15 +10,18 @@
             <h3 style="top:-40%">Instructions: </h3>
             <h4 style="font-weight:normal">Ask the ball a question!</h4>
             <h4 style="font-weight:normal">Tap to receive an answer.</h4>
-            <button id="button" onclick="rollBall();" style="visibility: visible;" > Ask the ball</button>
+
+            <input type="submit" id="button" onclick="rollBall();" value="Ask the Ball" style="z-index: 1;">
+            
+            <form method="post" action="/magic8ballWin">
+                <input type="submit" id="2" style="z-index:-1;position:absolute;left:635px;top:216px;"value=" Play Again "> 
+            </form>
+
             <h4 id="here" style="visibility:hidden;position:absolute;top:440px;left:628px;z-index:1;color: white;">
-                <%= res %>
+                nothing
             </h4>
 
-            <form id="reset" method="post" action="/magic8ball" style="visibility: hidden;">
-                <input type="submit" value="Reset">
-            </form>
-            <img src="../8ballblank.jpg" width="400px" height="400px" style="z-index:-1">
+            <p><img src="../8ballblank.jpg" width="400px" height="400px" style="z-index:-1"></p>
         </div>
         <div>
             <form method="post" action="/gameMenu" style="text-align:center;margin:auto;width:50%;z-index:1;">
@@ -27,14 +30,43 @@
         </div>
         <script>
             function rollBall() {
+                var x = magic8ball();
+                document.getElementById("here").innerHTML = x;
                 document.getElementById("here").style.visibility = "visible";
-                document.getElementById("button").innerHTML = "Try Again?";
-                document.getElementById("button").setAttribute("onclick", "resetForm();");
+                var button = document.getElementById("button");
+                var two = document.getElementById("2");
+                button.style.zIndex = -1;
+                two.style.zIndex = 1;
             }
 
-            function resetForm() {
-                document.getElementById("reset").submit();
-            }
+            function magic8ball() { //there are no points, it's just a magic 8 ball
+                //magic 8 ball responses taken from wikipedia
+                const ans = ["   It is certain."
+                    , " It is decidedly so."
+                    , "    Without a doubt."
+                    , "     Yes definitely."
+                    , "   100% rely on it."
+
+                    , "  As I see it, yes."
+                    , "     Most likely."
+                    , "   Outlook good."
+                    , "    Yes you can."
+                    , "   Signs say yes."
+
+                    , "Unknown, try again."
+                    , "   Ask again later."
+                    , "  Better not tell you."
+                    , "  Cannot predict now."
+                    , " Concentrate harder."
+
+                    , "  Don't count on it."
+                    , "     My reply is no."
+                    , "  My sources say no."
+                    , "Outlook not so good."
+                    , "    Very doubtful."];
+                var _results = Math.floor(Math.random() * 19); //gen a random number 0-19
+                return ans[_results];
+            }//end function
         </script>
     </body>
 </html>
