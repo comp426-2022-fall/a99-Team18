@@ -15,9 +15,9 @@ A web application that lets people play minigames. Users create an account that 
 5. Type `http://localhost:4321/` into address bar
 6. Create account and enjoy
 
-## Video
+## Video Demonstration
 
-
+To see our demonstration, please click [here](https://www.youtube.com/watch?v=RY_cmW2vhiY)
 
 ## Dependancies
 
