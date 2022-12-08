@@ -2,7 +2,9 @@
 
 ## Summary 
 
-A web application that lets people play minigames. Users create an account that gives them access to four minigames: Rock Paper Scissors, Morra, TicTacToe, and Magic 8 Ball. Players are also able to see their wins and track their high scores.
+A web application that lets people play minigames. Users create an account that gives them access to four minigames: Rock Paper Scissors, Morra, TicTacToe and Magic 8 Ball. Players are also able to see their wins and track their high scores.
+
+<img width="800" alt="Screen Shot 2022-12-08 at 1 47 28 PM" src="https://user-images.githubusercontent.com/77812153/206541392-93d55c87-1837-4197-86c3-2a1509160b7b.png">
 
 ## Instructions
 
